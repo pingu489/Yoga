@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Yoga Bonastre - Reservas</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Yoga Bonastre</h1>
+    <p>Reserva tu clase de yoga</p>
+  </header>
+
+  <div class="container">
+    <div class="form-section">
+      <form id="bookingForm">
+        <div class="form-group">
+          <label for="date">Selecciona una fecha:</label>
+          <input type="date" id="date" required />
+        </div>
+
+        <div class="form-group">
+          <label for="time">Selecciona una hora:</label>
+          <select id="time" required>
+            <option value="">-- Elige un horario --</option>
+            <option value="09:00">09:00</option>
+            <option value="10:30">10:30</option>
+            <option value="12:00">12:00</option>
+            <option value="18:00">18:00</option>
+            <option value="19:30">19:30</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="name">Nombre completo:</label>
+          <input type="text" id="name" required placeholder="Ej. Ana García" />
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Teléfono:</label>
+          <input type="tel" id="phone" required placeholder="Ej. 612345678" />
+        </div>
+
+        <button type="submit">Reservar Clase</button>
+      </form>
+
+      <div class="confirmation" id="confirmation">
+        ¡Gracias! Tu clase de yoga ha sido reservada con éxito.
+      </div>
+    </div>
+
+    <div class="calendar-section">
+      <div class="calendar-header" id="calendar-month-year">
+        <!-- Se rellena con JS -->
+      </div>
+      <div class="calendar-grid" id="calendar-days">
+        <!-- Días de la semana -->
+        <div class="calendar-day-header">L</div>
+        <div class="calendar-day-header">M</div>
+        <div class="calendar-day-header">X</div>
+        <div class="calendar-day-header">J</div>
+        <div class="calendar-day-header">V</div>
+        <div class="calendar-day-header">S</div>
+        <div class="calendar-day-header">D</div>
+        <!-- Días del mes (rellenados con JS) -->
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Síguenos en redes sociales</p>
+    <div class="social-icons">
+      <a href="https://instagram.com/tu_perfil" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://wa.me/tunumero" target="_blank"><i class="fab fa-whatsapp"></i></a>
+      <a href="https://facebook.com/tu_pagina" target="_blank"><i class="fab fa-facebook"></i></a>
+    </div>
+    <p>© 2025 Yoga Bonastre. Todos los derechos reservados.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
