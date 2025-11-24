@@ -161,4 +161,11 @@ footer {
 .social-icons a:hover {
   transform: scale(1.2);
   color: #4a7c59;
+
+}
+
+.calendar-day.selected {
+  background-color: #4a7c59;
+  color: white;
+  transform: scale(1.1);
 }
