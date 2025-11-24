@@ -30,7 +30,10 @@ async function cargarReservas() {
 
 // ===== UTILIDADES =====
 function formatearFecha(date) {
-  return date.toISOString().split('T')[0];
+  const año = date.getFullYear();
+  const mes = String(date.getMonth() + 1).padStart(2, '0');
+  const día = String(date.getDate()).padStart(2, '0');
+  return `${año}-${mes}-${día}`;
 }
 
 function getDisponibilidad(fechaStr) {
@@ -142,5 +145,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 });
+
 
 
