@@ -1,6 +1,6 @@
 // ===== CONFIGURACIÓN =====
 const HORARIOS_DISPONIBLES = ["09:00", "10:30", "12:00", "18:00", "19:30"];
-const API_URL = "https://script.google.com/macros/s/AKfycbw5V9X67XHYQT8dsykh2GjeLLfE6gmcCaWLgByqJKlFbcPlfcjeYvz08jKYCcnUH0ddSA/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbx8UepmVuMoihB4SijznGn_R1u0VK7fO-NGAF14ehxIwVeLtFQpNByuIXIHQ4Ss3VyKBg/exec";
 
 let reservasGlobales = {};
 
@@ -142,4 +142,5 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 });
+
 
