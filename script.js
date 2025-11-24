@@ -5,26 +5,53 @@ const API_URL = "https://script.google.com/macros/s/AKfycbx8UepmVuMoihB4SijznGn_
 let reservasGlobales = {};
 
 // ===== CARGAR RESERVAS =====
-async function cargarReservas() {
-  try {
-    const response = await fetch(API_URL);
-    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-    const data = await response.json();
-    
-    const reservas = {};
-    if (Array.isArray(data)) {
-      data.forEach(item => {
-        const fecha = item.fecha;
-        if (fecha && item.hora) {
-          if (!reservas[fecha]) reservas[fecha] = [];
-          reservas[fecha].push(item.hora);
-        }
+function renderCalendar(mes, anio, fechaSeleccionada = null) {
+  const primerDia = new Date(anio, mes, 1);
+  const ultimoDia = new Date(anio, mes + 1, 0);
+  const hoy = new Date();
+
+  const nombresMeses = [
+    "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+    "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+  ];
+  document.getElementById('calendar-month-year').textContent = `${nombresMeses[mes]} ${anio}`;
+
+  const grid = document.getElementById('calendar-days');
+  if (!grid) return;
+  while (grid.children.length > 7) grid.removeChild(grid.lastChild);
+
+  const inicio = primerDia.getDay();
+  const diasEnBlanco = inicio === 0 ? 6 : inicio - 1;
+  for (let i = 0; i < diasEnBlanco; i++) {
+    const div = document.createElement('div');
+    div.classList.add('calendar-day', 'empty');
+    grid.appendChild(div);
+  }
+
+  for (let dia = 1; dia <= ultimoDia.getDate(); dia++) {
+    const fecha = new Date(anio, mes, dia);
+    const fechaStr = formatearFecha(fecha);
+    const esHoy = formatearFecha(hoy) === fechaStr;
+    const estado = getDisponibilidad(fechaStr);
+    const esSeleccionado = fechaSeleccionada === fechaStr;
+
+    const div = document.createElement('div');
+    div.classList.add('calendar-day', estado);
+    if (esHoy) div.classList.add('today');
+    if (esSeleccionado) div.classList.add('selected');
+    div.textContent = dia;
+
+    if (estado === 'available') {
+      div.addEventListener('click', () => {
+        document.querySelectorAll('.calendar-day.selected').forEach(el => {
+          el.classList.remove('selected');
+        });
+        div.classList.add('selected');
+        document.getElementById('date').value = fechaStr;
       });
     }
-    reservasGlobales = reservas;
-  } catch (error) {
-    console.error("Error al cargar reservas:", error);
-    reservasGlobales = {};
+
+    grid.appendChild(div);
   }
 }
 
@@ -55,7 +82,7 @@ function renderCalendar(mes, anio) {
   document.getElementById('calendar-month-year').textContent = `${nombresMeses[mes]} ${anio}`;
 
   const grid = document.getElementById('calendar-days');
-  if (!grid) return; // Protección por si el DOM no está listo
+  if (!grid) return; 
   while (grid.children.length > 7) grid.removeChild(grid.lastChild);
 
   const inicio = primerDia.getDay();
@@ -89,11 +116,21 @@ function renderCalendar(mes, anio) {
 
 // ===== ENVIAR RESERVA =====
 async function enviarReserva(formData) {
+  const date = formData.get('date');
+  const time = formData.get('time');
+  const name = formData.get('name');
+  const phone = formData.get('phone');
+
+  if (!date || !time || !name || !phone) {
+    alert("Por favor, completa todos los campos.");
+    return false;
+  }
+
   const url = `${API_URL}?` + new URLSearchParams({
-    date: formData.get('date'),
-    time: formData.get('time'),
-    name: formData.get('name'),
-    phone: formData.get('phone')
+    date: date,
+    time: time,
+    name: name,
+    phone: phone
   });
 
   try {
@@ -101,8 +138,8 @@ async function enviarReserva(formData) {
     const result = await response.json();
     
     if (result.success) {
-      const fecha = formData.get('date');
-      const hora = formData.get('time');
+      const fecha = date;
+      const hora = time;
       if (!reservasGlobales[fecha]) reservasGlobales[fecha] = [];
       reservasGlobales[fecha].push(hora);
       
@@ -130,6 +167,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.warn("No se cargaron reservas, pero el calendario se mostrará.");
   }).finally(() => {
     renderCalendar(ahora.getMonth(), ahora.getFullYear());
+    
   });
 
   // Formulario
@@ -145,6 +183,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 });
+
 
 
 
