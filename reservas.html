@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Reservas - Yoga Bonastre</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .reservas-container {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+      text-align: center;
+    }
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1.5rem;
+      color: #3a5f40;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">Yoga Bonastre</a>
+      <a href="index.html" class="nav-reserve">← Volver</a>
+    </div>
+  </nav>
+
+  <div class="reservas-container">
+    <h1>Reserva tu clase</h1>
+    <p style="margin: 1rem 0 2rem; color: #555;">Selecciona fecha, hora y completa tus datos.</p>
+    <div id="bookeoWidget"></div>
+  </div>
+
+  <script type="text/javascript" src="https://bookeo.com/widget.js?a=42561H3JUJW19ABD1EB439"></script>
+</body>
+</html>
