@@ -36,7 +36,7 @@ header h1 {
 .calendar-section {
   background: white;
   border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   padding: 1.5rem;
   flex: 1;
   min-width: 300px;
@@ -133,9 +133,33 @@ button:hover {
   border: 2px solid #4a7c59;
 }
 
+.calendar-day.selected {
+  background-color: #4a7c59;
+  color: white;
+}
+
 .calendar-day.empty {
   opacity: 0;
   cursor: default;
+}
+
+/* Horario de clases */
+.horario-clases {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.95rem;
+}
+
+.horario-clases th,
+.horario-clases td {
+  padding: 0.7rem;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.horario-clases th {
+  background-color: #ecf0f1;
 }
 
 footer {
@@ -161,11 +185,4 @@ footer {
 .social-icons a:hover {
   transform: scale(1.2);
   color: #4a7c59;
-
-}
-
-.calendar-day.selected {
-  background-color: #4a7c59;
-  color: white;
-  transform: scale(1.1);
 }
