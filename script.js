@@ -8,7 +8,6 @@ let reservasGlobales = {};
 async function cargarReservas() {
   try {
     const response = await fetch(API_URL);
-    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
     const data = await response.json();
     
     const reservas = {};
@@ -78,7 +77,6 @@ function renderCalendar(mes, anio, fechaSeleccionada = null) {
     if (esHoy) div.classList.add('today');
     if (esSeleccionado) div.classList.add('selected');
     div.textContent = dia;
-    div.dataset.fecha = fechaStr;
 
     if (estado === 'available') {
       div.addEventListener('click', () => {
@@ -94,7 +92,6 @@ function renderCalendar(mes, anio, fechaSeleccionada = null) {
   }
 }
 
-// ===== ENVIAR RESERVA =====
 // ===== ENVIAR RESERVA =====
 async function enviarReserva(formData) {
   const date = formData.get('date')?.trim();
@@ -119,21 +116,18 @@ async function enviarReserva(formData) {
     const result = await response.json();
     
     if (result.success) {
-      // Actualizar vista local
       if (!reservasGlobales[date]) reservasGlobales[date] = [];
       reservasGlobales[date].push(time);
       
-      // Actualizar calendario visual
       const ahora = new Date();
       renderCalendar(ahora.getMonth(), ahora.getFullYear(), date);
-      
       return true;
     } else {
-      throw new Error(result.error || "Error al guardar la reserva.");
+      throw new Error(result.error || "Error al guardar.");
     }
   } catch (error) {
     console.error("Error al enviar reserva:", error);
-    alert("Hubo un problema. Inténtalo de nuevo más tarde.");
+    alert("Hubo un problema. Inténtalo más tarde.");
     return false;
   }
 }
@@ -143,36 +137,26 @@ document.addEventListener('DOMContentLoaded', async () => {
   const ahora = new Date();
   document.getElementById('date').min = formatearFecha(ahora);
 
-  cargarReservas().catch(err => {
-    console.warn("No se cargaron reservas, pero el calendario se mostrará.");
-  }).finally(() => {
+  cargarReservas().finally(() => {
     renderCalendar(ahora.getMonth(), ahora.getFullYear());
   });
 
-  const form = document.getElementById('bookingForm');
-  if (form) {
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const exito = await enviarReserva(new FormData(e.target));
-      if (exito) {
-        document.getElementById('confirmation').style.display = 'block';
-        e.target.reset();
-        // Quitar selección tras reset
-        document.querySelectorAll('.calendar-day.selected').forEach(el => {
-          el.classList.remove('selected');
-        });
-      }
-    });
-  }
+  document.getElementById('bookingForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const exito = await enviarReserva(new FormData(e.target));
+    if (exito) {
+      document.getElementById('confirmation').style.display = 'block';
+      e.target.reset();
+      document.querySelectorAll('.calendar-day.selected').forEach(el => {
+        el.classList.remove('selected');
+      });
+    }
+  });
 
-  // Sincronizar selección manual en el input de fecha
   document.getElementById('date').addEventListener('change', (e) => {
     const ahora = new Date();
     renderCalendar(ahora.getMonth(), ahora.getFullYear(), e.target.value);
   });
 });
-
-
-
 
 
