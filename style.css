@@ -1,188 +1,155 @@
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-sizing: border-box;
+}
+
+:root {
+  --color-primary: #3a5f40;
+  --color-secondary: #5d8a66;
+  --color-accent: #c9b48a;
+  --color-bg: #f8f5f0;
+  --color-text: #333;
+  --color-light: #fff;
+  --font-main: 'Georgia', serif;
+  --font-sans: 'Segoe UI', system-ui, sans-serif;
 }
 
 body {
-  background-color: #f9f9f9;
-  color: #333;
+  font-family: var(--font-sans);
+  background-color: var(--color-bg);
+  color: var(--color-text);
   line-height: 1.6;
 }
 
-header {
-  background-color: #4a7c59;
-  color: white;
-  text-align: center;
-  padding: 2rem 1rem;
+.navbar {
+  background-color: var(--color-primary);
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-header h1 {
-  font-size: 2.2rem;
-}
-
-.container {
-  max-width: 1000px;
-  margin: 2rem auto;
-  padding: 0 1rem;
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
   display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.form-section,
-.calendar-section {
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  padding: 1.5rem;
-  flex: 1;
-  min-width: 300px;
+.nav-logo {
+  color: var(--color-light);
+  font-family: var(--font-main);
+  font-size: 1.8rem;
+  text-decoration: none;
 }
 
-.form-group {
-  margin-bottom: 1.2rem;
+.nav-reserve {
+  background: var(--color-accent);
+  color: var(--color-primary);
+  padding: 0.55rem 1.4rem;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
-label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: bold;
+.nav-reserve:hover {
+  background: #d4c6a8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
-input,
-select {
-  width: 100%;
-  padding: 0.75rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 1rem;
-}
-
-button {
-  width: 100%;
-  padding: 0.9rem;
-  background-color: #4a7c59;
-  color: white;
-  font-size: 1.1rem;
-  font-weight: bold;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-button:hover {
-  background-color: #3a5e45;
-}
-
-.confirmation {
-  margin-top: 1.5rem;
-  padding: 1rem;
-  background-color: #e6f4ea;
-  border-left: 4px solid #4a7c59;
-  border-radius: 4px;
-  display: none;
-}
-
-/* Calendario */
-.calendar-header {
-  text-align: center;
-  margin-bottom: 1rem;
-  font-weight: bold;
-  color: #4a7c59;
-}
-
-.calendar-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 4px;
-}
-
-.calendar-day-header {
-  text-align: center;
-  font-weight: bold;
-  padding: 0.4rem;
-  font-size: 0.85rem;
-}
-
-.calendar-day {
-  aspect-ratio: 1;
+.hero {
+  min-height: 80vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
-  font-weight: bold;
-  cursor: pointer;
-  transition: transform 0.2s;
+  padding: 2rem 1rem;
+  background: linear-gradient(rgba(248,245,240,0.9), rgba(248,245,240,0.9)),
+              url('https://images.unsplash.com/photo-1544367567-0f2fcb766f7c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
 }
 
-.calendar-day.available {
-  background-color: #d4edda;
-  color: #155724;
+.hero-content {
+  text-align: center;
+  max-width: 700px;
+  background: rgba(255,255,255,0.88);
+  padding: 3rem 2rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.1);
 }
 
-.calendar-day.unavailable {
-  background-color: #f8d7da;
-  color: #721c24;
+.hero h1 {
+  font-family: var(--font-main);
+  font-size: 2.8rem;
+  color: var(--color-primary);
+  margin-bottom: 1.2rem;
+  line-height: 1.2;
 }
 
-.calendar-day.today {
-  border: 2px solid #4a7c59;
+.hero-subtitle {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 2rem;
+  font-weight: 300;
 }
 
-.calendar-day.selected {
-  background-color: #4a7c59;
+.cta-button {
+  display: inline-block;
+  background: var(--color-primary);
   color: white;
+  padding: 0.9rem 2.2rem;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  border-radius: 30px;
+  transition: all 0.3s;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
-.calendar-day.empty {
-  opacity: 0;
-  cursor: default;
-}
-
-/* Horario de clases */
-.horario-clases {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 1rem 0;
-  font-size: 0.95rem;
-}
-
-.horario-clases th,
-.horario-clases td {
-  padding: 0.7rem;
-  text-align: left;
-  border: 1px solid #ddd;
-}
-
-.horario-clases th {
-  background-color: #ecf0f1;
+.cta-button:hover {
+  background: var(--color-secondary);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
 }
 
 footer {
   text-align: center;
-  padding: 2rem 1rem 3rem;
-  background-color: #2e2e2e;
-  color: #ddd;
+  padding: 2.5rem 1rem 2rem;
+  background: var(--color-primary);
+  color: var(--color-light);
   margin-top: 3rem;
 }
 
 .social-icons {
-  margin-top: 1rem;
+  margin: 1.2rem 0;
 }
 
 .social-icons a {
   display: inline-block;
-  margin: 0 10px;
-  color: white;
+  margin: 0 12px;
+  color: var(--color-light);
   font-size: 1.8rem;
   transition: transform 0.3s;
 }
 
 .social-icons a:hover {
+  color: var(--color-accent);
   transform: scale(1.2);
-  color: #4a7c59;
 }
+
+.footer-text {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+  .hero h1 { font-size: 2.2rem; }
+  .nav-container { flex-direction: column; gap: 1rem; }
+}
+
