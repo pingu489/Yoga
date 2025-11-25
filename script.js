@@ -101,10 +101,21 @@ async function enviarReserva(formData) {
   const name = formData.get('name');
   const phone = formData.get('phone');
 
-  if (!date || !time || !name || !phone) {
-    alert("Por favor, completa todos los campos.");
-    return false;
-  }
+console.log({
+  date: date,
+  time: time,
+  name: name,
+  phone: phone
+});
+
+if (!date || !time || !name || !phone) {
+  alert(`Falta: 
+    Fecha: ${!date ? '✅' : '❌'}
+    Hora: ${!time ? '✅' : '❌'}
+    Nombre: ${!name ? '✅' : '❌'}
+    Teléfono: ${!phone ? '✅' : '❌'}`);
+  return false;
+}
 
   const url = `${API_URL}?` + new URLSearchParams({
     date: date,
@@ -169,6 +180,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     renderCalendar(ahora.getMonth(), ahora.getFullYear(), e.target.value);
   });
 });
+
 
 
 
