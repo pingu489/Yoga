@@ -18,12 +18,12 @@
       <form id="bookingForm">
         <div class="form-group">
           <label for="date">Selecciona una fecha:</label>
-          <input type="date" id="date" required />
+          <input type="date" id="date" name="date" required />
         </div>
 
         <div class="form-group">
           <label for="time">Selecciona una hora:</label>
-          <select id="time" required>
+          <select id="time" name="time" required>
             <option value="">-- Elige un horario --</option>
             <option value="09:00">09:00</option>
             <option value="10:30">10:30</option>
@@ -35,12 +35,12 @@
 
         <div class="form-group">
           <label for="name">Nombre completo:</label>
-          <input type="text" id="name" required placeholder="Ej. Ana García" />
+          <input type="text" id="name" name="name" required placeholder="Ej. Ana García" />
         </div>
 
         <div class="form-group">
           <label for="phone">Teléfono:</label>
-          <input type="tel" id="phone" required placeholder="Ej. 612345678" />
+          <input type="tel" id="phone" name="phone" required placeholder="Ej. 612345678" />
         </div>
 
         <button type="submit">Reservar Clase</button>
