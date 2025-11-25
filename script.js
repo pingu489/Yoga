@@ -95,27 +95,17 @@ function renderCalendar(mes, anio, fechaSeleccionada = null) {
 }
 
 // ===== ENVIAR RESERVA =====
+// ===== ENVIAR RESERVA =====
 async function enviarReserva(formData) {
-  const date = formData.get('date');
-  const time = formData.get('time');
-  const name = formData.get('name');
-  const phone = formData.get('phone');
+  const date = formData.get('date')?.trim();
+  const time = formData.get('time')?.trim();
+  const name = formData.get('name')?.trim();
+  const phone = formData.get('phone')?.trim();
 
-console.log({
-  date: date,
-  time: time,
-  name: name,
-  phone: phone
-});
-
-if (!date || !time || !name || !phone) {
-  alert(`Falta: 
-    Fecha: ${!date ? '✅' : '❌'}
-    Hora: ${!time ? '✅' : '❌'}
-    Nombre: ${!name ? '✅' : '❌'}
-    Teléfono: ${!phone ? '✅' : '❌'}`);
-  return false;
-}
+  if (!date || !time || !name || !phone) {
+    alert("Por favor, completa todos los campos.");
+    return false;
+  }
 
   const url = `${API_URL}?` + new URLSearchParams({
     date: date,
@@ -129,20 +119,21 @@ if (!date || !time || !name || !phone) {
     const result = await response.json();
     
     if (result.success) {
-      const fecha = date;
-      const hora = time;
-      if (!reservasGlobales[fecha]) reservasGlobales[fecha] = [];
-      reservasGlobales[fecha].push(hora);
+      // Actualizar vista local
+      if (!reservasGlobales[date]) reservasGlobales[date] = [];
+      reservasGlobales[date].push(time);
       
+      // Actualizar calendario visual
       const ahora = new Date();
-      renderCalendar(ahora.getMonth(), ahora.getFullYear(), fecha);
+      renderCalendar(ahora.getMonth(), ahora.getFullYear(), date);
+      
       return true;
     } else {
-      throw new Error(result.error || "Error al guardar");
+      throw new Error(result.error || "Error al guardar la reserva.");
     }
   } catch (error) {
     console.error("Error al enviar reserva:", error);
-    alert("Hubo un problema. Inténtalo más tarde.");
+    alert("Hubo un problema. Inténtalo de nuevo más tarde.");
     return false;
   }
 }
@@ -180,6 +171,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     renderCalendar(ahora.getMonth(), ahora.getFullYear(), e.target.value);
   });
 });
+
 
 
 
