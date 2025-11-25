@@ -1,29 +1,40 @@
- <header>
-    <link rel="stylesheet" href="style.css" />
-    <h1>Yoga Bonastre</h1>
-    <p>Reserva tu clase de yoga</p>
-  </header>
-
-  <!-- Widget de Bookeo -->
-  <div class="container" style="max-width: 1000px; padding: 0 1rem;">
-    <div class="form-section" style="text-align: center;">
-      <h2 style="margin-bottom: 1.5rem; color: #4a7c59;">Reserva tu clase</h2>
-      <div id="bookeoWidget"></div>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Yoga Bonastre</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Menú de navegación -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">Yoga Bonastre</a>
+      <!-- <a href="reservas.html" class="nav-reserve">Reservas</a> -->
     </div>
-  </div>
+  </nav>
 
-  <!-- Horario de clases (opcional, lo puedes dejar) -->
-  <div class="container" style="max-width:800px;">
-    <h2 style="text-align:center; margin:2rem 0 1rem; color:#4a7c59;">Horari Ioga</h2>
-    <table class="horario-clases">
-      <!-- tu tabla -->
-    </table>
-  </div>
+  <!-- Hero section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Encuentra tu equilibrio</h1>
+      <p class="hero-subtitle">Clases de yoga en un espacio tranquilo, guiadas con atención plena y respeto por tu cuerpo.</p>
+      <a href="reservas.html" class="cta-button">Reserva tu clase</a>
+    </div>
+  </section>
 
-  <footer></footer>
-
-  <!-- Script de Bookeo (al final) -->
-  <script type="text/javascript" src="https://bookeo.com/widget.js?a=42561H3JUJW19ABD1EB439"></script>
+  <!-- Footer -->
+  <footer>
+    <p>Síguenos en redes sociales</p>
+    <div class="social-icons">
+      <a href="https://instagram.com/tu_perfil" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://wa.me/tunumero" target="_blank"><i class="fab fa-whatsapp"></i></a>
+      <a href="https://facebook.com/tu_pagina" target="_blank"><i class="fab fa-facebook"></i></a>
+    </div>
+    <p class="footer-text">© 2025 Yoga Bonastre. Todos los derechos reservados.</p>
+  </footer>
 </body>
 </html>
 
